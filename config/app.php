@@ -178,6 +178,11 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
     ],
 
+    // Supported languages
+    'supported_languages' => [
+        'en' => 'English'
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
