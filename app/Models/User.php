@@ -32,13 +32,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['last_active_at', 'created_at', 'deleted_at', 'updated_at'];
-
-    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -55,6 +48,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_active_at' => 'datetime',
+        'created_at' => 'datetime',
+        'deleted_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function setPasswordAttribute($value)
