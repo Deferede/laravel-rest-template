@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,7 +28,15 @@ class User extends Authenticatable
         'telegram_id',
         'email',
         'password',
+        'last_active_at',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['last_active_at', 'created_at', 'deleted_at', 'updated_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -56,5 +65,13 @@ class User extends Authenticatable
     public function getRoleAttribute()
     {
         return $this->roles->first();
+    }
+
+    /**
+     * Filter "online" users
+     */
+    public function scopeOnline(Builder $query)
+    {
+        return $query->where('last_active_at', '>=', now()->subMinutes(5));
     }
 }
