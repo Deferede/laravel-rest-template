@@ -17,7 +17,7 @@ class TrackLastActiveAt
     public function handle(Request $request, Closure $next)
     {
         if (!$request->user()) {
-            return next($request);
+            return $next($request);
         }
 
         if (! $request->user()->last_active_at || $request->user()->last_active_at->isPast()) {
